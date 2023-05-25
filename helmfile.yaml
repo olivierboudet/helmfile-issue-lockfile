@@ -1,0 +1,19 @@
+
+lockFilePath: env/{{ .Environment.Name}}/helmfile.{{ .Environment.Name}}.lock
+
+environments:
+  dev:
+  staging:
+
+repositories:
+  - name: bitnami
+    url: registry-1.docker.io/bitnamicharts
+    oci: true
+---
+releases:
+  - name: mongodb
+    namespace: default
+    chart: bitnami/mongodb
+    version: 13.10.3
+    values:
+      - env/{{ .Environment.Name }}/mongodb.values.yaml
